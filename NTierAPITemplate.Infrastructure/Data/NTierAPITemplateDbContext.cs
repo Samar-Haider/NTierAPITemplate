@@ -1,17 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using NTierAPITemplate.Domain.Entities;
 
 namespace NTierAPITemplate.Infrastructure.Data
 {
-    public class NTierAPITemplateDbContext : DbContext
+    public class NTierAPITemplateDbContext : IdentityDbContext<UserAccount, IdentityRole<Guid>, Guid>
     {
         public NTierAPITemplateDbContext(DbContextOptions<NTierAPITemplateDbContext> options)
-            : base(options)
+            : base(options) { }
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
+            // apply your extra configs:
+            builder.ApplyConfigurationsFromAssembly(typeof(NTierAPITemplateDbContext).Assembly);
         }
     }
 }

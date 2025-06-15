@@ -1,8 +1,5 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using NTierAPITemplate.Common.Auth;
 using NTierAPITemplate.Extensions;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +9,9 @@ builder.Services
 
 // 2 Add your layered services
 builder.Services
-    .AddInfrastructure(builder.Configuration)   // DbContext, repos, JwtService
-    .AddApplication();                           // FluentValidation
+        .AddInfrastructure(builder.Configuration)   // DbContext, repos, JwtService
+        .AddApplication()
+        .AddAuthenticationAndJwt(builder.Configuration);
 
 // Add services to the container.
 
@@ -45,27 +43,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// 4 Configure JWT-Bearer authentication
-var jwt = builder.Configuration.GetSection("Jwt").Get<JwtSettings>()!;
-var keyBytes = Encoding.UTF8.GetBytes(jwt.Secret);
-
-builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidIssuer = jwt.Issuer,
-            ValidateAudience = true,
-            ValidAudience = jwt.Audience,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
-            ValidateLifetime = true,
-            ClockSkew = TimeSpan.FromMinutes(1)
-        };
-    });
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -77,6 +54,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

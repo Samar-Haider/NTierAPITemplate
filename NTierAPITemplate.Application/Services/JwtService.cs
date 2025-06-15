@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NTierAPITemplate.Application.Dtos;
 using NTierAPITemplate.Application.Interfaces;
 using NTierAPITemplate.Common.Auth;
+using NTierAPITemplate.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -13,18 +15,27 @@ namespace NTierAPITemplate.Application.Services
     public class JwtService : IJwtService
     {
         private readonly JwtSettings _settings;
-        public JwtService(IOptions<JwtSettings> options)
+        private readonly UserManager<UserAccount> _users;
+        public JwtService(IOptions<JwtSettings> opts, UserManager<UserAccount> users)
         {
-            _settings = options.Value;
+            _settings = opts.Value;
+            _users = users;
         }
 
-        public string GenerateToken(UserDto user)
+        public async Task<string> GenerateTokenAsync(string email, string password)
         {
-            var claims = new[] {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.Role)
-        };
+            var user = await _users.FindByEmailAsync(email);
+            if (user is null || !await _users.CheckPasswordAsync(user, password))
+                throw new UnauthorizedAccessException("Invalid credentials.");
+
+            var roles = await _users.GetRolesAsync(user);
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+            claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Secret));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.UtcNow.AddMinutes(_settings.ExpiryMinutes);
@@ -39,6 +50,7 @@ namespace NTierAPITemplate.Application.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
 
         public ClaimsPrincipal? ValidateToken(string token)
         {
