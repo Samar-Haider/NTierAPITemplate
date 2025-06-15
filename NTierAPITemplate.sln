@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTierAPITemplate", "NTierAPITemplate\NTierAPITemplate.csproj", "{E5A05D69-664C-4EE0-9E90-479730D7A338}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTierAPITemplate.Application", "NTierAPITemplate.Application\NTierAPITemplate.Application.csproj", "{F9D535DB-5C86-4E71-A7F6-C1B7A33D3EE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTierAPITemplate.Domain", "NTierAPITemplate.Domain\NTierAPITemplate.Domain.csproj", "{C88B9E41-24ED-4510-A3D1-04CD211BC0A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTierAPITemplate.Infrastructure", "NTierAPITemplate.Infrastructure\NTierAPITemplate.Infrastructure.csproj", "{423A742E-9530-425C-8703-BBECA73FC077}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTierAPITemplate.Common", "NTierAPITemplate.Common\NTierAPITemplate.Common.csproj", "{32F03F06-5BEB-41E9-8D2F-49E632271E04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5A05D69-664C-4EE0-9E90-479730D7A338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5A05D69-664C-4EE0-9E90-479730D7A338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5A05D69-664C-4EE0-9E90-479730D7A338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5A05D69-664C-4EE0-9E90-479730D7A338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9D535DB-5C86-4E71-A7F6-C1B7A33D3EE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D535DB-5C86-4E71-A7F6-C1B7A33D3EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D535DB-5C86-4E71-A7F6-C1B7A33D3EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D535DB-5C86-4E71-A7F6-C1B7A33D3EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C88B9E41-24ED-4510-A3D1-04CD211BC0A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C88B9E41-24ED-4510-A3D1-04CD211BC0A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C88B9E41-24ED-4510-A3D1-04CD211BC0A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C88B9E41-24ED-4510-A3D1-04CD211BC0A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{423A742E-9530-425C-8703-BBECA73FC077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{423A742E-9530-425C-8703-BBECA73FC077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{423A742E-9530-425C-8703-BBECA73FC077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{423A742E-9530-425C-8703-BBECA73FC077}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32F03F06-5BEB-41E9-8D2F-49E632271E04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32F03F06-5BEB-41E9-8D2F-49E632271E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32F03F06-5BEB-41E9-8D2F-49E632271E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32F03F06-5BEB-41E9-8D2F-49E632271E04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34A9AC61-6C6A-4E6D-9E98-95F0094699FE}
+	EndGlobalSection
+EndGlobal
