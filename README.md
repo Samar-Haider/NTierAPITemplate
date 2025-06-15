@@ -54,7 +54,7 @@ src/
     Data/
       MyAppDbContext.cs
       EntityTypeConfigurations/
-        UserConfiguration.cs
+        UserAccountConfiguration.cs
     Repositories/
       IUserRepository.cs
       UserRepository.cs
